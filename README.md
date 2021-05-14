@@ -1,2 +1,3 @@
-# graphql_demo
-Demo of a GraphQl API in .NET 5
+# GraphQL Demo
+
+Demo application and slides for a GraphQL API in .NET 5. Used to demostrate core differences between GraphQL and REST.
