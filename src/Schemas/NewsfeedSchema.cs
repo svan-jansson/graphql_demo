@@ -1,4 +1,3 @@
-using GraphQl.Demo.Mutations;
 using GraphQl.Demo.Queries;
 using GraphQL.Types;
 using GraphQL.Utilities;
@@ -12,7 +11,7 @@ namespace GraphQl.Demo.Schemas
         public NewsfeedSchema(IServiceProvider provider) : base(provider)
         {
             Query = provider.GetRequiredService<NewsfeedQuery>();
-            Mutation = provider.GetRequiredService<NewsfeedMutation>();
+            //Mutation = provider.GetRequiredService<NewsfeedMutation>();
         }
     }
 }

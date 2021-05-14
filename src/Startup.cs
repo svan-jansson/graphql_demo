@@ -1,7 +1,7 @@
-using GraphQl.Demo.Mutations;
 using GraphQl.Demo.NewsfeedData;
 using GraphQl.Demo.Queries;
 using GraphQl.Demo.Schemas;
+using GraphQl.Demo.Types;
 using GraphQL.Server;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
@@ -26,9 +26,11 @@ namespace GraphQl.Demo
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = true)
                 .AddSystemTextJson();
 
+            services.AddSingleton<StoryType>();
+            services.AddSingleton<AuthorType>();
             services.AddSingleton<INewsfeedData, MockNewsfeedData>();
             services.AddSingleton<NewsfeedQuery>();
-            services.AddSingleton<NewsfeedMutation>();
+            //services.AddSingleton<NewsfeedMutation>();
             services.AddSingleton<ISchema, NewsfeedSchema>();
 
             services.AddLogging(builder => builder.AddConsole());

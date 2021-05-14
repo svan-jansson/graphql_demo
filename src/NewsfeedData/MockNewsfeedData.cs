@@ -78,7 +78,7 @@ namespace GraphQl.Demo.NewsfeedData
             return author;
         }
 
-        public IEnumerable<Story> GetNewsfeed() => _stories;
+        public IEnumerable<Story> GetNewsfeed() => _stories.OrderByDescending(story => story.PublishedOn);
 
         public IEnumerable<Author> GetAuthors() => _authors;
 
