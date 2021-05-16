@@ -20,7 +20,7 @@ This demo application contains a working subscription, implemented with `GraphQL
 3. Add a GraphQL subscription that resolves the `IObservable<T>`. See [NewsfeedSubscription.cs](https://github.com/svan-jansson/graphql_demo/blob/526a792a2680d5de61f3bf04a0e3817aec634dd7/src/Subscriptions/NewsfeedSubscription.cs#L19).
 4. Register the subscription with the GraphQL schema. See [NewsfeedSchema.cs](https://github.com/svan-jansson/graphql_demo/blob/526a792a2680d5de61f3bf04a0e3817aec634dd7/src/Schemas/NewsfeedSchema.cs#L17).
 5. Add a custom `DocumentExecuter` that supports the `SubscriptionExecutionStrategy`. See [DocumentExecuterWithSubscriptions.cs](https://github.com/svan-jansson/graphql_demo/blob/526a792a2680d5de61f3bf04a0e3817aec634dd7/src/DocumentExecuter/DocumentExecuterWithSubscriptions.cs#L9).
-6. Add the custom `DocumentExecuter` along with WebSockets and GraphQL WebSockets support in startup. See [Startup.cs](https://github.com/svan-jansson/graphql_demo/blob/526a792a2680d5de61f3bf04a0e3817aec634dd7/src/Startup.cs#L32).
+6. Add the custom `DocumentExecuter` along with WebSockets and GraphQL WebSockets support in startup. See [Startup.cs](https://github.com/svan-jansson/graphql_demo/blob/526a792a2680d5de61f3bf04a0e3817aec634dd7/src/Startup.cs#L28).
 
 ## How to run
 
