@@ -30,7 +30,6 @@ namespace GraphQl.Demo
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = true)
                 .AddSystemTextJson()
                 .AddWebSockets()
-                .AddDataLoader()
                 .AddGraphTypes(typeof(NewsfeedSchema));
         }
 
