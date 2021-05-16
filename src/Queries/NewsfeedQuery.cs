@@ -31,7 +31,6 @@ namespace GraphQl.Demo.Queries
                         Description = "The unique ID of the author"
                     }
                 ),
-
                 resolve: context => newsfeedData.GetStoriesByAuthor(context.GetArgument<int>("authorId")));
         }
     }

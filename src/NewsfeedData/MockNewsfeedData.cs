@@ -102,11 +102,6 @@ namespace GraphQl.Demo.NewsfeedData
                 .OrderByDescending(story => story.PublishedOn);
         }
 
-        public IObservable<Story> SubscribeToNewsfeed()
-        {
-            return _newsfeedStream
-                .Select(story => story)
-                .AsObservable();
-        }
+        public IObservable<Story> SubscribeToNewsfeed() => _newsfeedStream.AsObservable();
     }
 }
