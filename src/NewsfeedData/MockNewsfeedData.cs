@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 
 namespace GraphQl.Demo.NewsfeedData
 {
@@ -9,6 +11,7 @@ namespace GraphQl.Demo.NewsfeedData
     {
         private readonly IList<Story> _stories = new List<Story>();
         private readonly IList<Author> _authors = new List<Author>();
+        private readonly ISubject<Story> _newsfeedStream = new ReplaySubject<Story>(1);
 
         public MockNewsfeedData()
         {
@@ -18,8 +21,8 @@ namespace GraphQl.Demo.NewsfeedData
             {
                 var author = new Author
                 {
-                    Id = 10 - id,
-                    Name = Lorem.Words(2),
+                    Id = 10 - id + 1,
+                    Name = $"{Lorem.Words(1)} {Lorem.Words(1)}",
                     Stories = new List<Story>()
                 };
 
@@ -28,7 +31,7 @@ namespace GraphQl.Demo.NewsfeedData
                     Id = id,
                     Title = Lorem.Sentence(3, 5),
                     Body = Lorem.Paragraph(5, 7, 5, 10),
-                    PublishedOn = DateTime.Now.AddHours(-id),
+                    PublishedOn = DateTime.Now.AddDays(-id),
                     Author = author
                 };
 
@@ -47,8 +50,11 @@ namespace GraphQl.Demo.NewsfeedData
                 throw new ArgumentException($"{nameof(authorId)} not found");
             }
 
+            var storyId = _stories.Count + 1;
+
             var story = new Story
             {
+                Id = storyId,
                 Title = title,
                 Body = body,
                 PublishedOn = DateTime.Now,
@@ -58,6 +64,7 @@ namespace GraphQl.Demo.NewsfeedData
             (author.Stories as List<Story>).Add(story);
 
             _stories.Add(story);
+            _newsfeedStream.OnNext(story);
 
             return story;
         }
@@ -80,9 +87,26 @@ namespace GraphQl.Demo.NewsfeedData
 
         public IEnumerable<Story> GetNewsfeed() => _stories.OrderByDescending(story => story.PublishedOn);
 
-        public IEnumerable<Author> GetAuthors() => _authors;
+        public IEnumerable<Author> GetAuthors() => _authors.OrderBy(author => author.Name);
 
         public IEnumerable<Story> GetStoriesByAuthor(int authorId)
-            => _stories.Where(story => story.Author.Id == authorId);
+        {
+            var author = _authors.Where(author => author.Id == authorId).FirstOrDefault();
+            if (author is null)
+            {
+                throw new ArgumentException($"{nameof(authorId)} not found");
+            }
+
+            return _stories
+                .Where(story => story.Author.Id == authorId)
+                .OrderByDescending(story => story.PublishedOn);
+        }
+
+        public IObservable<Story> SubscribeToNewsfeed()
+        {
+            return _newsfeedStream
+                .Select(story => story)
+                .AsObservable();
+        }
     }
 }

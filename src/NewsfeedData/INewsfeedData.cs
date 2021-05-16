@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GraphQl.Demo.NewsfeedData
 {
@@ -9,5 +10,6 @@ namespace GraphQl.Demo.NewsfeedData
         Story AddStory(int authorId, string title, string body);
         IEnumerable<Author> GetAuthors();
         Author AddAuthor(string name);
+        IObservable<Story> SubscribeToNewsfeed();
     }
 }

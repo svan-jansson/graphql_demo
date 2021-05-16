@@ -1,13 +1,13 @@
+using GraphQl.Demo.DocumentExecuter;
+using GraphQl.Demo.Middleware;
 using GraphQl.Demo.NewsfeedData;
-using GraphQl.Demo.Queries;
 using GraphQl.Demo.Schemas;
-using GraphQl.Demo.Types;
+using GraphQL;
 using GraphQL.Server;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace GraphQl.Demo
 {
@@ -22,27 +22,24 @@ namespace GraphQl.Demo
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddGraphQL()
+            services
+                .AddSingleton<INewsfeedData, MockNewsfeedData>()
+                .AddSingleton<ISchema, NewsfeedSchema>()
+                .AddSingleton<IDocumentExecuter, DocumentExecuterWithSubscriptions>()
+                .AddGraphQL()
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = true)
-                .AddSystemTextJson();
-
-            services.AddSingleton<StoryType>();
-            services.AddSingleton<AuthorType>();
-            services.AddSingleton<INewsfeedData, MockNewsfeedData>();
-            services.AddSingleton<NewsfeedQuery>();
-            //services.AddSingleton<NewsfeedMutation>();
-            services.AddSingleton<ISchema, NewsfeedSchema>();
-
-            services.AddLogging(builder => builder.AddConsole());
-            services.AddHttpContextAccessor();
+                .AddSystemTextJson()
+                .AddWebSockets()
+                .AddDataLoader()
+                .AddGraphTypes(typeof(NewsfeedSchema));
         }
 
         public void Configure(IApplicationBuilder app)
         {
-
-            app.UseGraphQL<ISchema>();
+            app.UseWebSockets();
+            app.UseGraphQLWebSockets<ISchema>();
+            app.UseGraphQL<ISchema, GraphQlHttpMiddlewareWithLogs<ISchema>>();
             app.UseGraphQLPlayground();
-
         }
     }
 }

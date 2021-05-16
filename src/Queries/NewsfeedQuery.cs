@@ -9,7 +9,7 @@ namespace GraphQl.Demo.Queries
     {
         public NewsfeedQuery(INewsfeedData newsfeedData)
         {
-            Name = "NewsfeedQuery";
+            Name = nameof(NewsfeedQuery);
 
             Field<ListGraphType<StoryType>>(
                 name: "getNewsfeed",
