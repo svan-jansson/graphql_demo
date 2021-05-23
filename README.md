@@ -25,6 +25,7 @@ This demo application contains a working subscription, implemented with `GraphQL
 ## How to run
 
 ```bash
+cd /src
 dotnet run
 ```
 Open a browser and navigate to <https://localhost:5001/ui/playground>
