@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GraphQl.Demo.NewsfeedData
+namespace GraphQL.Demo.NewsfeedData
 {
     public class Author
     {

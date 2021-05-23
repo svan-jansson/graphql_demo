@@ -1,9 +1,9 @@
-﻿using GraphQl.Demo.NewsfeedData;
-using GraphQl.Demo.Types;
+﻿using GraphQL.Demo.NewsfeedData;
+using GraphQL.Demo.Types;
 using GraphQL.Resolvers;
 using GraphQL.Types;
 
-namespace GraphQl.Demo.Subscriptions
+namespace GraphQL.Demo.Subscriptions
 {
     public class NewsfeedSubscription : ObjectGraphType<object>
     {

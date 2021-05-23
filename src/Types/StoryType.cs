@@ -1,12 +1,14 @@
-﻿using GraphQl.Demo.NewsfeedData;
+﻿using GraphQL.Demo.NewsfeedData;
 using GraphQL.Types;
 
-namespace GraphQl.Demo.Types
+namespace GraphQL.Demo.Types
 {
     public class StoryType : ObjectGraphType<Story>
     {
         public StoryType()
         {
+            Name = "Story";
+
             Field(s => s.Id).Description("The unique ID of the story");
             Field(s => s.Title).Description("The title of the story");
             Field(s => s.Body).Description("The body of the story");

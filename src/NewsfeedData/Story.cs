@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GraphQl.Demo.NewsfeedData
+namespace GraphQL.Demo.NewsfeedData
 {
     public class Story
     {

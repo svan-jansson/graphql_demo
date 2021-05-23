@@ -1,7 +1,7 @@
 ﻿using GraphQL.Execution;
 using GraphQL.Language.AST;
 
-namespace GraphQl.Demo.DocumentExecuter
+namespace GraphQL.Demo.DocumentExecuter
 {
     /// <summary>
     /// Add support for executing GraphQL subscriptions, which is disabled by default

@@ -1,9 +1,8 @@
-﻿using GraphQl.Demo.NewsfeedData;
-using GraphQl.Demo.Types;
-using GraphQL;
+﻿using GraphQL.Demo.NewsfeedData;
+using GraphQL.Demo.Types;
 using GraphQL.Types;
 
-namespace GraphQl.Demo.Queries
+namespace GraphQL.Demo.Queries
 {
     public class NewsfeedQuery : ObjectGraphType<object>
     {

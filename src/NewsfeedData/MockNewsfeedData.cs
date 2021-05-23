@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 
-namespace GraphQl.Demo.NewsfeedData
+namespace GraphQL.Demo.NewsfeedData
 {
     public class MockNewsfeedData : INewsfeedData
     {

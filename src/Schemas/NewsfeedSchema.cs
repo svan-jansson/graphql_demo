@@ -1,12 +1,12 @@
-using GraphQl.Demo.Mutations;
-using GraphQl.Demo.Queries;
-using GraphQl.Demo.Subscriptions;
+using GraphQL.Demo.Mutations;
+using GraphQL.Demo.Queries;
+using GraphQL.Demo.Subscriptions;
 using GraphQL.Types;
 using GraphQL.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace GraphQl.Demo.Schemas
+namespace GraphQL.Demo.Schemas
 {
     public class NewsfeedSchema : Schema
     {

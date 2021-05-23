@@ -1,15 +1,14 @@
-using GraphQl.Demo.DocumentExecuter;
-using GraphQl.Demo.Middleware;
-using GraphQl.Demo.NewsfeedData;
-using GraphQl.Demo.Schemas;
-using GraphQL;
+using GraphQL.Demo.DocumentExecuter;
+using GraphQL.Demo.Middleware;
+using GraphQL.Demo.NewsfeedData;
+using GraphQL.Demo.Schemas;
 using GraphQL.Server;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GraphQl.Demo
+namespace GraphQL.Demo
 {
     public class Startup
     {
@@ -37,7 +36,7 @@ namespace GraphQl.Demo
         {
             app.UseWebSockets();
             app.UseGraphQLWebSockets<ISchema>();
-            app.UseGraphQL<ISchema, GraphQlHttpMiddlewareWithLogs<ISchema>>();
+            app.UseGraphQL<ISchema, GraphQLHttpMiddlewareWithLogs<ISchema>>();
             app.UseGraphQLPlayground();
         }
     }

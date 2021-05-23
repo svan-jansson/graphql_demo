@@ -6,14 +6,14 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GraphQl.Demo.Middleware
+namespace GraphQL.Demo.Middleware
 {
-    public class GraphQlHttpMiddlewareWithLogs<TSchema> : GraphQLHttpMiddleware<TSchema>
+    public class GraphQLHttpMiddlewareWithLogs<TSchema> : GraphQLHttpMiddleware<TSchema>
        where TSchema : ISchema
     {
         private readonly ILogger _logger;
 
-        public GraphQlHttpMiddlewareWithLogs(
+        public GraphQLHttpMiddlewareWithLogs(
             ILogger<GraphQLHttpMiddleware<TSchema>> logger,
             RequestDelegate next,
             IGraphQLRequestDeserializer requestDeserializer)
