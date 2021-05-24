@@ -20,9 +20,9 @@ namespace GraphQL.Demo.Queries
                 description: "Get the authors behind the stories in the newsfeed",
                 resolve: context => newsfeedData.GetAuthors());
 
-            Field<ListGraphType<StoryType>>(
-                name: "getStoriesByAuthor",
-                description: "Get all stories by a given author",
+            Field<AuthorType>(
+                name: "getAuthor",
+                description: "Get a single author",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<IntGraphType>>
                     {
@@ -30,7 +30,7 @@ namespace GraphQL.Demo.Queries
                         Description = "The unique ID of the author"
                     }
                 ),
-                resolve: context => newsfeedData.GetStoriesByAuthor(context.GetArgument<int>("authorId")));
+                resolve: context => newsfeedData.GetAuthor(context.GetArgument<int>("authorId")));
         }
     }
 }

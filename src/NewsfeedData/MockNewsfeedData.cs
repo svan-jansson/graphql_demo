@@ -15,6 +15,7 @@ namespace GraphQL.Demo.NewsfeedData
 
         public MockNewsfeedData()
         {
+            # region seed
             _stories = new List<Story>();
 
             for (var id = 1; id <= 10; id++)
@@ -40,6 +41,7 @@ namespace GraphQL.Demo.NewsfeedData
                 _stories.Add(story);
                 _authors.Add(author);
             }
+            # endregion
         }
 
         public Story AddStory(int authorId, string title, string body)
@@ -89,7 +91,7 @@ namespace GraphQL.Demo.NewsfeedData
 
         public IEnumerable<Author> GetAuthors() => _authors.OrderBy(author => author.Name);
 
-        public IEnumerable<Story> GetStoriesByAuthor(int authorId)
+        public Author GetAuthor(int authorId)
         {
             var author = _authors.Where(author => author.Id == authorId).FirstOrDefault();
             if (author is null)
@@ -97,9 +99,7 @@ namespace GraphQL.Demo.NewsfeedData
                 throw new ArgumentException($"{nameof(authorId)} not found");
             }
 
-            return _stories
-                .Where(story => story.Author.Id == authorId)
-                .OrderByDescending(story => story.PublishedOn);
+            return author;
         }
 
         public IObservable<Story> SubscribeToNewsfeed() => _newsfeedStream.AsObservable();

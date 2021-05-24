@@ -6,10 +6,10 @@ namespace GraphQL.Demo.NewsfeedData
     public interface INewsfeedData
     {
         IEnumerable<Story> GetNewsfeed();
-        IEnumerable<Story> GetStoriesByAuthor(int authorId);
-        Story AddStory(int authorId, string title, string body);
         IEnumerable<Author> GetAuthors();
+        Author GetAuthor(int authorId);
         Author AddAuthor(string name);
+        Story AddStory(int authorId, string title, string body);
         IObservable<Story> SubscribeToNewsfeed();
     }
 }
