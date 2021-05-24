@@ -1,4 +1,6 @@
-﻿using GraphQL.Execution;
+﻿using System;
+using System.Threading.Tasks;
+using GraphQL.Execution;
 using GraphQL.Language.AST;
 
 namespace GraphQL.Demo.DocumentExecuter
@@ -8,6 +10,9 @@ namespace GraphQL.Demo.DocumentExecuter
     /// </summary>
     public class DocumentExecuterWithSubscriptions : GraphQL.DocumentExecuter
     {
+        /// <summary>
+        /// Includes the SubscriptionExecutionStrategy when executing documents
+        /// </summary>
         protected override IExecutionStrategy SelectExecutionStrategy(ExecutionContext context)
         {
             return context.Operation.OperationType switch

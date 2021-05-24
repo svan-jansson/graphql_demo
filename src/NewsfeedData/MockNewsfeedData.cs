@@ -49,7 +49,7 @@ namespace GraphQL.Demo.NewsfeedData
             var author = _authors.Where(author => author.Id == authorId).FirstOrDefault();
             if (author is null)
             {
-                throw new ArgumentException($"{nameof(authorId)} not found");
+                throw new NewsfeedDataException($"{nameof(authorId)} {authorId} not found");
             }
 
             var storyId = _stories.Count + 1;
@@ -96,7 +96,7 @@ namespace GraphQL.Demo.NewsfeedData
             var author = _authors.Where(author => author.Id == authorId).FirstOrDefault();
             if (author is null)
             {
-                throw new ArgumentException($"{nameof(authorId)} not found");
+                throw new NewsfeedDataException($"{nameof(authorId)} {authorId} not found");
             }
 
             return author;

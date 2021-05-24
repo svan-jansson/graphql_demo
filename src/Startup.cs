@@ -1,7 +1,9 @@
+using System;
 using GraphQL.Demo.DocumentExecuter;
 using GraphQL.Demo.Middleware;
 using GraphQL.Demo.NewsfeedData;
 using GraphQL.Demo.Schemas;
+using GraphQL.Execution;
 using GraphQL.Server;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
@@ -25,19 +27,25 @@ namespace GraphQL.Demo
                 .AddSingleton<INewsfeedData, MockNewsfeedData>()
                 .AddSingleton<ISchema, NewsfeedSchema>()
                 .AddSingleton<IDocumentExecuter, DocumentExecuterWithSubscriptions>()
-                .AddGraphQL()
-                .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = true)
+                .AddGraphQL(options => options.UnhandledExceptionDelegate = ExposeNewsfeedExceptionMessages)
                 .AddSystemTextJson()
                 .AddWebSockets()
                 .AddGraphTypes(typeof(NewsfeedSchema));
         }
-
         public void Configure(IApplicationBuilder app)
         {
             app.UseWebSockets();
             app.UseGraphQLWebSockets<ISchema>();
             app.UseGraphQL<ISchema, GraphQLHttpMiddlewareWithLogs<ISchema>>();
             app.UseGraphQLPlayground();
+        }
+
+        private void ExposeNewsfeedExceptionMessages(UnhandledExceptionContext context)
+        {
+            if (context.Exception is NewsfeedDataException)
+            {
+                context.ErrorMessage = context.Exception.Message;
+            }
         }
     }
 }
