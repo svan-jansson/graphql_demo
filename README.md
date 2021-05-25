@@ -1,6 +1,6 @@
 # GraphQL Demo
 
-Demo application and slides for a GraphQL API in .NET 5. Used to demonstrate core differences between GraphQL and REST.
+Demo application and slides for a GraphQL API in .NET 5. Used to demonstrate core differences between GraphQL and REST. Used as a reference implementation for the talk [Writing GraphQL API's with .NET 5](https://www.meetup.com/Webstep-Uppsala/events/278277783/). 
 
 The application inside `/src` is a simple newsfeed API with support for
 
